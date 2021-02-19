@@ -129,18 +129,18 @@ table {
 	color: rgb(0, 0, 0);
 	padding:10px 10px;
 	text-align: center;
-}
-
-.totalWrapper .wrapper .wrapperAnsw input:checked + label {
-	background-color: #1b1b1b;
-	color: #fff;
     cursor: pointer;
 }
 
-/* .totalWrapper .wrapper .wrapperAnsw .wrong {
+.totalWrapper .wrapper .wrapperAnsw .checked {
+	background-color: #1b1b1b;
+	color: #fff;
+}
+
+.totalWrapper .wrapper .wrapperAnsw .wrong {
     background-color: rgb(226, 55, 55);
 }
 
 .totalWrapper .wrapper .wrapperAnsw .right {
     background-color: rgb(50, 150, 100);
-} */
+}

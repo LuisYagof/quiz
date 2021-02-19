@@ -1,4 +1,4 @@
-const questions = [
+const DATABASE = [
     {qu: "¿Cuál de estas películas la dirigió  Jean-Luc Godard?",
     an: [ "Los cuatrocientos golpes", "Vivir su vida", "Cuento de primavera", "Noche y niebla"],
     ok: 1},
@@ -25,29 +25,27 @@ const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
 
 
-// ----------------------------------------------- REMOVE FUNCTION
-// const BOTON = document.querySelector(".btn");
+// ------------------------------------------------------GENERATE---------------------------------------
 
-// BOTON.addEventListener("click", function(){
-//     let borrables = document.querySelectorAll(".quest");
-//     for (let i = 0; i < borrables.length; i++) {
-//         borrables[i].remove(); 
-//     }
-// });
 
-// ------------------------------------------------------GENERATE
-
+// la variable posición va a servir para indicar en qué objeto del array DATABASE nos encontramos. Y cambiar de pregunta 
 let position = 0;
 
 function printQuestion(question){
-    let arrayQuestEl = [];
+    // array "universal" en el que voy metiendo todos los elementos html generados, para poder borrarlos al acertar pregunta
+    let questionElements = [];
+    // genero la pregunta y le planto como texto el string del DATABASE. la pincho en mi subwrapper
     let title = document.createElement("h2");
     let content = document.createTextNode(question.qu);
     title.appendChild(content);
     WRAPPERTIT.appendChild(title);
-    arrayQuestEl.push(title)
+    // meto lo generado en el array creado arriba
+    questionElements.push(title)
 
+    // creo un array en el que recojo las respuestas de la DATABASE
     let arrayAns = question.an;
+
+    // recorro el array para generar los input+labels con sus valores correspondientes
     for (let i = 0; i < arrayAns.length; i++) {
         let input = document.createElement("input");
         input.setAttribute("id", i);
@@ -55,39 +53,49 @@ function printQuestion(question){
         input.setAttribute("name", "answer");
         input.setAttribute("type", "radio");
         WRAPPERANS.appendChild(input);
-        arrayQuestEl.push(input);
+        // meto lo generado en el array PREVIO***. Esto es para poder aplicar remove llegado el momento y que coja tanto título de pregunta como inputs+labels
+        questionElements.push(input);
         
+        // lo mismo con los labels
         let label = document.createElement("label");
         let labelCont = document.createTextNode(arrayAns[i]);
         label.setAttribute("for", i);
         label.appendChild(labelCont);
-        label.addEventListener("click",() => evaluateAnswer(question.ok, i, label, arrayQuestEl));
+        // una vez creados los labels, les añado un callback para que, al clicarlos, se dispare la función de evaluar. Recojo como parámetros: valor de la respuesta correcta, index del array de RESPUESTAS, array "universal"
+        label.addEventListener("click",() => evaluateAnswer(question.ok, i, questionElements, label));
         WRAPPERANS.appendChild(label);
-        arrayQuestEl.push(label);
+        // de nuevo meto todo en el array "universal"
+        questionElements.push(label);
     }
 }
 
-printQuestion(questions[position]);
+// disparo la función
+printQuestion(DATABASE[position]);
 
-// ----------------------------------------------------------EVALUATE
+// ----------------------------------------------------------EVALUATE-------------------------------------
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, answer, label, arrayQuestEl) {
-    if (correctAnsw === answer) {
-        // answer.classList.add("right")
-        position++;
-        setTimeout(function(){ remover(arrayQuestEl) }, 1500);
-        if (position < questions.length)
-        setTimeout(function(){ printQuestion(questions[position]) }, 1500);
+function evaluateAnswer(correctAnsw, answer, questionElements, label) {
+    label.classList.add("checked");
+    setTimeout( function() {
+        if (correctAnsw === answer) {
+            label.classList.remove("checked");
+            label.classList.add("right");
+            position++;
+            setTimeout(function(){ remover(questionElements) }, 1200);
+            if (position < DATABASE.length)
+                setTimeout(function(){ printQuestion(DATABASE[position]) }, 1200);
 
-    }else{
-        answer.innerText("wrong")
-    }
+        }else{
+            label.classList.remove("checked");
+            label.classList.add("wrong");
+        }
+    }, 500);
 }
 
-function remover(arrayQuestEl){
-    for (let i = 0; i < arrayQuestEl.length; i++) {
-        arrayQuestEl[i].remove();        
+function remover(questionElements){
+    for (let i = 0; i < questionElements.length; i++) {
+        questionElements[i].remove();        
     }
 }

@@ -17,7 +17,7 @@ const DATABASE = [
 
     {qu: "¿En cuál de las siguientes películas aparece una cartera con la inscripción 'BAD MOTHERFUCKER'?",
     an: [ "Pulp Fiction", "El gran Lebowski", "Jackie Brown", "Sospechosos habituales"],
-    ok: 2}
+    ok: 0}
 
 ]
 
@@ -39,7 +39,7 @@ function printQuestion(question){
     let content = document.createTextNode(question.qu);
     title.appendChild(content);
     WRAPPERTIT.appendChild(title);
-    // meto lo generado en el array creado arriba
+    // meto lo generado en el array "universal"
     questionElements.push(title)
 
     // creo un array en el que recojo las respuestas de la DATABASE
@@ -84,9 +84,16 @@ function evaluateAnswer(correctAnsw, answer, questionElements, label) {
             label.classList.add("right");
             position++;
             setTimeout(function(){ remover(questionElements) }, 1200);
-            if (position < DATABASE.length)
+            if (position < DATABASE.length) {
                 setTimeout(function(){ printQuestion(DATABASE[position]) }, 1200);
-
+            }else{
+                setTimeout(function(){
+                    let farewell = document.createElement("h2");
+                    let farewellText = document.createTextNode("ERES UN MÁQUINA");
+                    farewell.appendChild(farewellText);
+                    WRAPPERTIT.appendChild(farewell);}
+                , 1200);}
+            
         }else{
             label.classList.remove("checked");
             label.classList.add("wrong");

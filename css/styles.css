@@ -125,13 +125,22 @@ table {
 .totalWrapper .wrapper .wrapperAnsw label {
 	width: 90%;
     margin: 1% 0%;
-    background: #cccccc;
+    background-color: #cccccc;
 	color: rgb(0, 0, 0);
 	padding:10px 10px;
 	text-align: center;
 }
 
 .totalWrapper .wrapper .wrapperAnsw input:checked + label {
-	background: #1b1b1b;
+	background-color: #1b1b1b;
 	color: #fff;
+    cursor: pointer;
 }
+
+/* .totalWrapper .wrapper .wrapperAnsw .wrong {
+    background-color: rgb(226, 55, 55);
+}
+
+.totalWrapper .wrapper .wrapperAnsw .right {
+    background-color: rgb(50, 150, 100);
+} */

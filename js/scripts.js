@@ -1,17 +1,31 @@
 const questions = [
     {qu: "¿Cuál de estas películas la dirigió  Jean-Luc Godard?",
     an: [ "Los cuatrocientos golpes", "Vivir su vida", "Cuento de primavera", "Noche y niebla"],
-    correct: 1},
+    ok: 1},
 
-    {qu: "¿De qué famoso thriller es la pregunta '¿hablas conmigo?'?",
+    {qu: "¿En qué thriller setentero aparece un monólogo con la pregunta '¿hablas conmigo?'?",
     an: [ "La conversación", "Chacal", "Taxi Driver", "El cabo del miedo"],
-    correct: 2}
+    ok: 2},
+
+    {qu: "¿Cuál de estas producciones de Haneke es más antigua?",
+    an: [ "La pianista", "Funny Games", "Código desconocido", "El séptimo continente"],
+    ok: 3},
+
+    {qu: "¿Cuál de estas películas la protagoniza Klaus Kinski?",
+    an: [ "Stroszek", "Fitzcarraldo", "Alicia en las ciudades", "El matrimonio de Maria Braun"],
+    ok: 1},
+
+    {qu: "¿En cuál de las siguientes películas aparece una cartera con la inscripción 'BAD MOTHERFUCKER'?",
+    an: [ "Pulp Fiction", "El gran Lebowski", "Jackie Brown", "Sospechosos habituales"],
+    ok: 2}
 
 ]
 
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
 
+
+// ----------------------------------------------- REMOVE FUNCTION
 // const BOTON = document.querySelector(".btn");
 
 // BOTON.addEventListener("click", function(){
@@ -25,13 +39,15 @@ const WRAPPERANS = document.querySelector(".wrapperAnsw");
 
 let position = 0;
 
-function printQuestions(question){
+function printQuestion(question){
+    let arrayQuestEl = [];
     let title = document.createElement("h2");
-    let content = document.createTextNode(question[position].qu);
+    let content = document.createTextNode(question.qu);
     title.appendChild(content);
     WRAPPERTIT.appendChild(title);
+    arrayQuestEl.push(title)
 
-    let arrayAns = question[position].an;
+    let arrayAns = question.an;
     for (let i = 0; i < arrayAns.length; i++) {
         let input = document.createElement("input");
         input.setAttribute("id", i);
@@ -39,22 +55,39 @@ function printQuestions(question){
         input.setAttribute("name", "answer");
         input.setAttribute("type", "radio");
         WRAPPERANS.appendChild(input);
-
-        let labels = document.createElement("label");
-        let labelsCont = document.createTextNode(arrayAns[i]);
-        labels.setAttribute("for", i);
-        labels.appendChild(labelsCont);
-        WRAPPERANS.appendChild(labels);
-
+        arrayQuestEl.push(input);
+        
+        let label = document.createElement("label");
+        let labelCont = document.createTextNode(arrayAns[i]);
+        label.setAttribute("for", i);
+        label.appendChild(labelCont);
+        label.addEventListener("click",() => evaluateAnswer(question.ok, i, label, arrayQuestEl));
+        WRAPPERANS.appendChild(label);
+        arrayQuestEl.push(label);
     }
-
 }
 
-printQuestions(questions);
+printQuestion(questions[position]);
 
-// --------------------------------------------EVALUATE
+// ----------------------------------------------------------EVALUATE
 
-function evaluateAnswer(question) {
-    let respuesta
-    
+// let answers = document.querySelectorAll("input");
+
+function evaluateAnswer(correctAnsw, answer, label, arrayQuestEl) {
+    if (correctAnsw === answer) {
+        // answer.classList.add("right")
+        position++;
+        setTimeout(function(){ remover(arrayQuestEl) }, 1500);
+        if (position < questions.length)
+        setTimeout(function(){ printQuestion(questions[position]) }, 1500);
+
+    }else{
+        answer.innerText("wrong")
+    }
+}
+
+function remover(arrayQuestEl){
+    for (let i = 0; i < arrayQuestEl.length; i++) {
+        arrayQuestEl[i].remove();        
+    }
 }

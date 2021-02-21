@@ -1,5 +1,5 @@
 const DATABASE = [
-    {qu: "¿Cuál de estas películas la dirigió  Jean-Luc Godard?",
+    {qu: "¿Cuál de estas películas la dirigió Jean-Luc Godard?",
     an: [ "Los cuatrocientos golpes", "Vivir su vida", "Cuento de primavera", "Noche y niebla"],
     ok: 1},
 
@@ -23,6 +23,7 @@ const DATABASE = [
 
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
+let counter = 0;
 
 
 // ------------------------------------------------------GENERATE---------------------------------------
@@ -83,26 +84,48 @@ function evaluateAnswer(correctAnsw, answer, questionElements, label) {
             label.classList.remove("checked");
             label.classList.add("right");
             position++;
-            setTimeout(function(){ remover(questionElements) }, 1200);
+            counter++;
+            console.log(counter);
+            setTimeout(() => remover(questionElements), 1200);
             if (position < DATABASE.length) {
-                setTimeout(function(){ printQuestion(DATABASE[position]) }, 1200);
+                setTimeout(() => printQuestion(DATABASE[position]), 1200);
             }else{
-                setTimeout(function(){
-                    let farewell = document.createElement("h2");
-                    let farewellText = document.createTextNode("ERES UN MÁQUINA");
-                    farewell.appendChild(farewellText);
-                    WRAPPERTIT.appendChild(farewell);}
-                , 1200);}
+                setTimeout(function(){ count(counter) }, 1200);}
             
         }else{
             label.classList.remove("checked");
             label.classList.add("wrong");
+            counter= counter-1;
         }
     }, 500);
 }
+
+// ------------------------------------------------------NEXT QUESTION-----------------------------
 
 function remover(questionElements){
     for (let i = 0; i < questionElements.length; i++) {
         questionElements[i].remove();        
     }
+}
+
+// ----------------------------------------------------SCORE---------------------------------------
+
+function count(counter) {
+    if (counter > 3) {
+        let farewell = document.createElement("h2");
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. Eres un máquina`);
+        farewell.appendChild(farewellText);
+        WRAPPERTIT.appendChild(farewell);
+    } else if (counter < 0) {
+        let farewell = document.createElement("h2");
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. Pilotas poquísimo tron...`);
+        farewell.appendChild(farewellText);
+        WRAPPERTIT.appendChild(farewell);
+
+    } else {
+        let farewell = document.createElement("h2");
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. No eres tan máquina como te piensas`);
+        farewell.appendChild(farewellText);
+        WRAPPERTIT.appendChild(farewell);
+    }    
 }

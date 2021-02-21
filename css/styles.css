@@ -65,7 +65,7 @@ table {
 }
 
 .totalWrapper .wrapper {
-    width: 90%;
+    width: 98%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,7 +112,7 @@ table {
 }
 
 .totalWrapper .wrapper .wrapperTitle h2 {
-    font-size: 20px;
+    font-size: 1.2rem;
     line-height: 1.5;
 }
 
@@ -131,6 +131,8 @@ table {
 
 .totalWrapper .wrapper .wrapperAnsw label {
 	width: 90%;
+    min-height: 55px;
+    min-width: 250px;
     margin: 1% 0%;
     background-color: #cccccc;
 	color: rgb(0, 0, 0);
@@ -152,4 +154,55 @@ table {
 .totalWrapper .wrapper .wrapperAnsw .right {
     background-color: rgb(50, 150, 100);
     color: #fff;
+}
+
+/* ------------MEDIA QUERIES----------- */
+
+@media screen and (min-width: 768px) {
+    .totalWrapper .wrapper {
+        width: 92%;
+    }
+
+    .totalWrapper .wrapper img {
+        width: 13vw;
+        margin-bottom: 8%;
+    }
+
+    .totalWrapper .wrapper .mainTitle {
+        font-size: 4rem;
+    }
+    
+    .totalWrapper .wrapper p {
+        font-size: 1.8rem;
+    }
+    
+    .totalWrapper .wrapper .enterButton {
+        padding: 10px 20px;
+    }
+
+    .totalWrapper .wrapper .wrapperTitle h2 {
+        font-size: 1.5rem;
+    }
+    .totalWrapper .wrapper .wrapperAnsw {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .totalWrapper .wrapper .wrapperAnsw label {
+        width: 49%;
+        min-height: 107px;
+        font-size: 1.2rem;
+        line-height: 2;
+    }
+}
+
+@media screen and (min-width: 1368px) {
+    .totalWrapper .wrapper {
+        width: 80%;
+    }
+
+    .totalWrapper .wrapper img {
+        width: 8vw;
+        margin-bottom: 5%;
+    }
 }

@@ -63,7 +63,8 @@ function printQuestion(question){
         label.setAttribute("for", i);
         label.appendChild(labelCont);
         // una vez creados los labels, les añado un callback para que, al clicarlos, se dispare la función de evaluar. Recojo como parámetros: valor de la respuesta correcta, index del array de RESPUESTAS, array "universal"
-        label.addEventListener("click",() => evaluateAnswer(question.ok, i, questionElements, label));
+        let clicked = false;
+        label.addEventListener("click",() => evaluateAnswer(question.ok, i, questionElements, label, clicked));
         WRAPPERANS.appendChild(label);
         // de nuevo meto todo en el array "universal"
         questionElements.push(label);
@@ -77,27 +78,33 @@ printQuestion(DATABASE[position]);
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, answer, questionElements, label) {
+function evaluateAnswer(correctAnsw, answer, questionElements, label, clicked) {
     label.classList.add("checked");
-    setTimeout( function() {
-        if (correctAnsw === answer) {
-            label.classList.remove("checked");
-            label.classList.add("right");
-            position++;
-            counter++;
-            console.log(counter);
-            setTimeout(() => remover(questionElements), 1200);
-            if (position < DATABASE.length) {
-                setTimeout(() => printQuestion(DATABASE[position]), 1200);
+    if (!clicked) {
+        clicked = true;
+    
+        setTimeout( function() {
+            if (correctAnsw === answer) {
+                label.classList.remove("checked");
+                label.classList.add("right");
+                position++;
+                counter++;
+
+                console.log(counter);
+
+                setTimeout(() => remover(questionElements), 1200);
+                if (position < DATABASE.length) {
+                    setTimeout(() => printQuestion(DATABASE[position]), 1200);
+                }else{
+                    setTimeout(function(){ count(counter) }, 1200);}
+                
             }else{
-                setTimeout(function(){ count(counter) }, 1200);}
-            
-        }else{
-            label.classList.remove("checked");
-            label.classList.add("wrong");
-            counter= counter-1;
-        }
-    }, 500);
+                label.classList.remove("checked");
+                label.classList.add("wrong");
+                counter= counter-1;
+            }
+        }, 500);
+    }
 }
 
 // ------------------------------------------------------NEXT QUESTION-----------------------------
@@ -129,3 +136,6 @@ function count(counter) {
         WRAPPERTIT.appendChild(farewell);
     }    
 }
+
+
+//label.removeEventListener("click",() => evaluateAnswer(correctAnsw, answer, questionElements, label));

@@ -183,6 +183,7 @@ table {
     .totalWrapper .wrapper .wrapperTitle h2 {
         font-size: 1.5rem;
     }
+
     .totalWrapper .wrapper .wrapperAnsw {
         flex-direction: row;
         flex-wrap: wrap;
@@ -204,5 +205,13 @@ table {
     .totalWrapper .wrapper img {
         width: 8vw;
         margin-bottom: 5%;
+    }
+
+    .totalWrapper .wrapper .enterButton {
+        padding: 20px 30px;
+    }
+
+    .totalWrapper .wrapper .wrapperTitle h2 {
+        font-size: 2rem;
     }
 }

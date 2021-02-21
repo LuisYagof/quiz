@@ -23,7 +23,7 @@ const DATABASE = [
 
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
-let counter = 0;
+let counter = 5;
 
 
 // ------------------------------------------------------GENERATE---------------------------------------
@@ -92,11 +92,11 @@ function evaluateAnswer(correctAnsw, answer, questionElements, label, clicked) {
 
                 console.log(counter);
 
-                setTimeout(() => remover(questionElements), 1200);
+                setTimeout(() => remover(questionElements), 1000);
                 if (position < DATABASE.length) {
                     setTimeout(() => printQuestion(DATABASE[position]), 1200);
                 }else{
-                    setTimeout(function(){ count(counter) }, 1200);}
+                    setTimeout(() => count(counter), 1000);}
                 
             }else{
                 label.classList.remove("checked");
@@ -118,20 +118,20 @@ function remover(questionElements){
 // ----------------------------------------------------SCORE---------------------------------------
 
 function count(counter) {
-    if (counter > 3) {
+    if (counter > 6) {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. Eres un máquina`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: final-boss de Filmin. Eres un máquina`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
-    } else if (counter < 0) {
+    } else if (counter < 2) {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. Pilotas poquísimo tron...`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: sácate el abono de la filmoteca`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
 
     } else {
         let farewell = document.createElement("h2");
-        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 5. No eres tan máquina como te piensas`);
+        let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: gafapasta amateur`);
         farewell.appendChild(farewellText);
         WRAPPERTIT.appendChild(farewell);
     }    

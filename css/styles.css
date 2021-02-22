@@ -197,6 +197,25 @@ table {
     }
 }
 
+@media screen and (min-width: 960px) {
+    .totalWrapper .wrapper img {
+        width: 10vw;
+        margin-bottom: 5%;
+    }
+
+    .totalWrapper .wrapper .mainTitle {
+        margin-bottom: 5%;
+    }
+    .totalWrapper .wrapper p {
+        font-size: 1.6rem;
+    }
+
+    .totalWrapper .wrapper .enterButton {
+        margin: 5% auto;
+    }
+
+}
+
 @media screen and (min-width: 1368px) {
     .totalWrapper .wrapper {
         width: 80%;
@@ -204,7 +223,6 @@ table {
 
     .totalWrapper .wrapper img {
         width: 8vw;
-        margin-bottom: 5%;
     }
 
     .totalWrapper .wrapper .enterButton {

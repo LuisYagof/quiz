@@ -133,7 +133,7 @@ table {
 	width: 90%;
     min-height: 55px;
     min-width: 250px;
-    margin: 1% 0%;
+    margin: 2% 0%;
     background-color: #cccccc;
 	color: rgb(0, 0, 0);
 	padding:15px 15px;
@@ -190,7 +190,7 @@ table {
     }
 
     .totalWrapper .wrapper .wrapperAnsw label {
-        width: 49%;
+        width: 48%;
         min-height: 107px;
         font-size: 1.2rem;
         line-height: 2;

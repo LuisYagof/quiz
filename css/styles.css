@@ -149,6 +149,13 @@ table {
 .totalWrapper .wrapper .wrapperAnsw .wrong {
     background-color: rgb(226, 55, 55);
     color: #fff;
+    animation: dissapear 1.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes dissapear {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
 }
 
 .totalWrapper .wrapper .wrapperAnsw .right {

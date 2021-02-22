@@ -24,13 +24,11 @@ const DATABASE = [
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
 let counter = 5;
+// la variable posición va a servir para indicar en qué objeto del array DATABASE nos encontramos. Y cambiar de pregunta 
+let position = 0;
 
 
 // ------------------------------------------------------GENERATE---------------------------------------
-
-
-// la variable posición va a servir para indicar en qué objeto del array DATABASE nos encontramos. Y cambiar de pregunta 
-let position = 0;
 
 function printQuestion(question){
     // array "universal" en el que voy metiendo todos los elementos html generados, para poder borrarlos al acertar pregunta
@@ -62,9 +60,15 @@ function printQuestion(question){
         let labelCont = document.createTextNode(arrayAns[i]);
         label.setAttribute("for", i);
         label.appendChild(labelCont);
-        // una vez creados los labels, les añado un callback para que, al clicarlos, se dispare la función de evaluar. Recojo como parámetros: valor de la respuesta correcta, index del array de RESPUESTAS, array "universal"
-        let clicked = false;
-        label.addEventListener("click",() => evaluateAnswer(question.ok, i, questionElements, label, clicked));
+        // una vez creados los labels, les añado un callback para que, al clicarlos, se dispare la función de evaluar. Recojo como parámetros: valor de la respuesta correcta, index del array de RESPUESTAS, array "universal", label[i]. Y añado excepción "clicked", para que solo evalúe 1 click por label
+
+        label.addEventListener("click",() => {
+            if (!label.classList.contains("clicked")) {
+                evaluateAnswer(question.ok, i, questionElements, label)
+            }
+            });
+
+
         WRAPPERANS.appendChild(label);
         // de nuevo meto todo en el array "universal"
         questionElements.push(label);
@@ -78,33 +82,31 @@ printQuestion(DATABASE[position]);
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, answer, questionElements, label, clicked) {
+function evaluateAnswer(correctAnsw, answer, questionElements, label) {
     label.classList.add("checked");
-    if (!clicked) {
-        clicked = true;
+    label.classList.add("clicked");
     
-        setTimeout( function() {
-            if (correctAnsw === answer) {
-                label.classList.remove("checked");
-                label.classList.add("right");
-                position++;
-                counter++;
+    setTimeout( function() {
+        if (correctAnsw === answer) {
+            label.classList.remove("checked");
+            label.classList.add("right");
+            position++;
+            counter++;
+            // console.log(counter);
 
-                console.log(counter);
-
-                setTimeout(() => remover(questionElements), 1000);
-                if (position < DATABASE.length) {
-                    setTimeout(() => printQuestion(DATABASE[position]), 1200);
-                }else{
-                    setTimeout(() => count(counter), 1000);}
-                
+            setTimeout(() => remover(questionElements), 1000);
+            if (position < DATABASE.length) {
+                setTimeout(() => printQuestion(DATABASE[position]), 1200);
             }else{
-                label.classList.remove("checked");
-                label.classList.add("wrong");
-                counter= counter-1;
-            }
-        }, 500);
-    }
+                setTimeout(() => count(counter), 1000);}
+            
+        }else{
+            label.classList.remove("checked");
+            label.classList.add("wrong");
+            counter= counter-1;
+            // console.log(counter);
+        }
+    }, 500);
 }
 
 // ------------------------------------------------------NEXT QUESTION-----------------------------
@@ -115,7 +117,7 @@ function remover(questionElements){
     }
 }
 
-// ----------------------------------------------------SCORE---------------------------------------
+// ------------------------------------------------------SCORE-------------------------------------
 
 function count(counter) {
     if (counter > 6) {
@@ -137,5 +139,3 @@ function count(counter) {
     }    
 }
 
-
-//label.removeEventListener("click",() => evaluateAnswer(correctAnsw, answer, questionElements, label));

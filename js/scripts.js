@@ -27,6 +27,13 @@ let counter = 5;
 // la variable posición va a servir para indicar en qué objeto del array DATABASE nos encontramos. Y cambiar de pregunta 
 let position = 0;
 
+// ------------------------------------------------------SHUFFLE----------------------------------------
+
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
+shuffle(DATABASE);
 
 // ------------------------------------------------------GENERATE---------------------------------------
 
@@ -139,3 +146,14 @@ function count(counter) {
     }    
 }
 
+
+
+// ---------------------------------MORE CONTENT
+
+// {qu: "¿En cuál de las siguientes películas interviene Keanu Reeves?",
+// an: [ "Mi Idaho privado", "Bob Esponja: Un héroe al rescate", "Todas las respuestas", "A scanner darkly"],
+// ok: 2}
+
+// {qu: "De las siguientes películas ochenteras ¿cuál no dirigió Spielberg?",
+// an: [ "E.T. el extraterrestre", "Poltergeist", " Indiana Jones y la última cruzada", "El imperio del sol"],
+// ok: 3}

@@ -121,6 +121,12 @@ function remover(nodes){
 // ------------------------------------------------------SCORE-------------------------------------
 
 function count(counter) {
+    let restart = document.createElement("a");
+    restart.setAttribute("href", "main.html");
+    let restartText = document.createTextNode(`REINICIAR`);
+    restart.appendChild(restartText);
+    WRAPPERANS.appendChild(restart);
+
     if (counter > 6) {
         let farewell = document.createElement("h2");
         let farewellText = document.createTextNode(`Tu puntuación ha sido de ${counter} sobre 10. Nivel: final-boss de Filmin. Eres un máquina`);

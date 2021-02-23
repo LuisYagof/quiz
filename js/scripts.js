@@ -105,7 +105,10 @@ function evaluateAnswer(correctAnsw, answerNumber, nodes, answer) {
         }else{
             answer.classList.remove("checked");
             answer.classList.add("wrong");
+            position++;
             counter= counter-1;
+
+            next(nodes);
         }
     }, 500);
 }

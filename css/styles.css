@@ -149,7 +149,7 @@ table {
 .totalWrapper .wrapper .wrapperAnsw .wrong {
     background-color: rgb(226, 55, 55);
     color: #fff;
-    animation: dissapear 1.5s ease-in;
+    animation: dissapear 0.8s ease-in;
     animation-fill-mode: forwards;
 }
 

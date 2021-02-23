@@ -43,8 +43,15 @@ function printQuestion(question){
     WRAPPERTIT.appendChild(title);
     questionElements.push(title)
 
-    let arrayAns = question.an;
+    let arrayAns = [];
+    for (let i = 0; i < question.an.length; i++) {
+        arrayAns.push({
+            pos: i,
+            text: question.an[i]
+        });
+    }
 
+    shuffle(arrayAns);
     for (let i = 0; i < arrayAns.length; i++) {
         let input = document.createElement("input");
         input.setAttribute("id", i);
@@ -55,13 +62,13 @@ function printQuestion(question){
         questionElements.push(input);
         
         let label = document.createElement("label");
-        let labelCont = document.createTextNode(arrayAns[i]);
+        let labelCont = document.createTextNode(arrayAns[i].text);
         label.setAttribute("for", i);
         label.appendChild(labelCont);
 
         label.addEventListener("click",() => {
             if (!label.classList.contains("clicked")) {
-                evaluateAnswer(question.ok, i, questionElements, label)
+                evaluateAnswer(question.ok, questionElements, label, arrayAns[i].pos)
             }
             });
 
@@ -74,12 +81,12 @@ printQuestion(DATABASE[position]);
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
 
-function evaluateAnswer(correctAnsw, answerNumber, nodes, answer) {
+function evaluateAnswer(correctAnsw, nodes, answer, selected) {
     answer.classList.add("checked");
     answer.classList.add("clicked");
     
     setTimeout( function() {
-        if (correctAnsw === answerNumber) {
+        if (correctAnsw === selected) {
             answer.classList.remove("checked");
             answer.classList.add("right");
             position++;

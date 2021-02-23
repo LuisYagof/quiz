@@ -90,7 +90,7 @@ table {
     font-size: 1.2rem;
 }
 
-.totalWrapper .wrapper .enterButton {
+.totalWrapper .wrapper a {
     margin: 8% auto;
     background: #0f0f0f;
     border: none;
@@ -100,7 +100,7 @@ table {
     text-decoration: none;
 }
 
-.totalWrapper .wrapper .enterButton:hover {
+.totalWrapper .wrapper a:hover {
       background: #3f3f3f;
 }
 
@@ -183,7 +183,7 @@ table {
         font-size: 1.8rem;
     }
     
-    .totalWrapper .wrapper .enterButton {
+    .totalWrapper .wrapper a {
         padding: 10px 20px;
     }
 
@@ -217,7 +217,7 @@ table {
         font-size: 1.6rem;
     }
 
-    .totalWrapper .wrapper .enterButton {
+    .totalWrapper .wrapper a {
         margin: 5% auto;
     }
 
@@ -236,7 +236,7 @@ table {
         width: 8vw;
     }
 
-    .totalWrapper .wrapper .enterButton {
+    .totalWrapper .wrapper a {
         padding: 20px 30px;
     }
 

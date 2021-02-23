@@ -90,22 +90,22 @@ printQuestion(DATABASE[position]);
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, nodes, answer, selected) {
-    answer.classList.add("checked");
-    answer.classList.add("clicked");
+function evaluateAnswer(correctStr, nodes, answerLabel, selectedStr) {
+    answerLabel.classList.add("checked");
+    answerLabel.classList.add("clicked");
     
     setTimeout( function() {
-        if (correctAnsw === selected) {
-            answer.classList.remove("checked");
-            answer.classList.add("right");
+        if (correctStr === selectedStr) {
+            answerLabel.classList.remove("checked");
+            answerLabel.classList.add("right");
             position++;
             counter++;
 
             next(nodes);
             
         }else{
-            answer.classList.remove("checked");
-            answer.classList.add("wrong");
+            answerLabel.classList.remove("checked");
+            answerLabel.classList.add("wrong");
             position++;
             counter= counter-1;
 

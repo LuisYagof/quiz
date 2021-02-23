@@ -89,38 +89,40 @@ printQuestion(DATABASE[position]);
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, answer, questionElements, label) {
-    label.classList.add("checked");
-    label.classList.add("clicked");
+function evaluateAnswer(correctAnsw, answerNumber, nodes, answer) {
+    answer.classList.add("checked");
+    answer.classList.add("clicked");
     
     setTimeout( function() {
-        if (correctAnsw === answer) {
-            label.classList.remove("checked");
-            label.classList.add("right");
+        if (correctAnsw === answerNumber) {
+            answer.classList.remove("checked");
+            answer.classList.add("right");
             position++;
             counter++;
-            // console.log(counter);
 
-            setTimeout(() => remover(questionElements), 1000);
-            if (position < DATABASE.length) {
-                setTimeout(() => printQuestion(DATABASE[position]), 1200);
-            }else{
-                setTimeout(() => count(counter), 1000);}
+            next(nodes);
             
         }else{
-            label.classList.remove("checked");
-            label.classList.add("wrong");
+            answer.classList.remove("checked");
+            answer.classList.add("wrong");
             counter= counter-1;
-            // console.log(counter);
         }
     }, 500);
 }
 
 // ------------------------------------------------------NEXT QUESTION-----------------------------
 
-function remover(questionElements){
-    for (let i = 0; i < questionElements.length; i++) {
-        questionElements[i].remove();        
+function next(nodes) {
+    setTimeout(() => remover(nodes), 1000);
+    if (position < DATABASE.length) {
+        setTimeout(() => printQuestion(DATABASE[position]), 1000);
+    }else{
+        setTimeout(() => count(counter), 1000);}
+}
+
+function remover(nodes){
+    for (let i = 0; i < nodes.length; i++) {
+        nodes[i].remove();        
     }
 }
 

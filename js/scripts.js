@@ -24,7 +24,6 @@ const DATABASE = [
 const WRAPPERTIT = document.querySelector(".wrapperTitle");
 const WRAPPERANS = document.querySelector(".wrapperAnsw");
 let counter = 5;
-// la variable posición va a servir para indicar en qué objeto del array DATABASE nos encontramos. Y cambiar de pregunta 
 let position = 0;
 
 // ------------------------------------------------------SHUFFLE----------------------------------------
@@ -32,26 +31,20 @@ let position = 0;
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
-
 shuffle(DATABASE);
 
 // ------------------------------------------------------GENERATE---------------------------------------
 
 function printQuestion(question){
-    // array "universal" en el que voy metiendo todos los elementos html generados, para poder borrarlos al acertar pregunta
     let questionElements = [];
-    // genero la pregunta y le planto como texto el string del DATABASE. la pincho en mi subwrapper
     let title = document.createElement("h2");
     let content = document.createTextNode(question.qu);
     title.appendChild(content);
     WRAPPERTIT.appendChild(title);
-    // meto lo generado en el array "universal"
     questionElements.push(title)
 
-    // creo un array en el que recojo las respuestas de la DATABASE
     let arrayAns = question.an;
 
-    // recorro el array para generar los input+labels con sus valores correspondientes
     for (let i = 0; i < arrayAns.length; i++) {
         let input = document.createElement("input");
         input.setAttribute("id", i);
@@ -59,15 +52,12 @@ function printQuestion(question){
         input.setAttribute("name", "answer");
         input.setAttribute("type", "radio");
         WRAPPERANS.appendChild(input);
-        // meto lo generado en el array PREVIO***. Esto es para poder aplicar remove llegado el momento y que coja tanto título de pregunta como inputs+labels
         questionElements.push(input);
         
-        // lo mismo con los labels
         let label = document.createElement("label");
         let labelCont = document.createTextNode(arrayAns[i]);
         label.setAttribute("for", i);
         label.appendChild(labelCont);
-        // una vez creados los labels, les añado un callback para que, al clicarlos, se dispare la función de evaluar. Recojo como parámetros: valor de la respuesta correcta, index del array de RESPUESTAS, array "universal", label[i]. Y añado excepción "clicked", para que solo evalúe 1 click por label
 
         label.addEventListener("click",() => {
             if (!label.classList.contains("clicked")) {
@@ -75,19 +65,14 @@ function printQuestion(question){
             }
             });
 
-
         WRAPPERANS.appendChild(label);
-        // de nuevo meto todo en el array "universal"
         questionElements.push(label);
     }
 }
 
-// disparo la función
 printQuestion(DATABASE[position]);
 
 // ----------------------------------------------------------EVALUATE-------------------------------------
-
-// let answers = document.querySelectorAll("input");
 
 function evaluateAnswer(correctAnsw, answerNumber, nodes, answer) {
     answer.classList.add("checked");
@@ -147,15 +132,3 @@ function count(counter) {
         WRAPPERTIT.appendChild(farewell);
     }    
 }
-
-
-
-// ---------------------------------MORE CONTENT
-
-// {qu: "¿En cuál de las siguientes películas interviene Keanu Reeves?",
-// an: [ "Mi Idaho privado", "Bob Esponja: Un héroe al rescate", "Todas las respuestas", "A scanner darkly"],
-// ok: 2}
-
-// {qu: "De las siguientes películas ochenteras ¿cuál no dirigió Spielberg?",
-// an: [ "E.T. el extraterrestre", "Poltergeist", " Indiana Jones y la última cruzada", "El imperio del sol"],
-// ok: 3}

@@ -221,6 +221,9 @@ table {
         margin: 5% auto;
     }
 
+    .totalWrapper .wrapper .wrapperAnsw label {
+        min-width: 420px;
+
 }
 
 @media screen and (min-width: 1368px) {

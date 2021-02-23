@@ -1,23 +1,23 @@
 const DATABASE = [
     {qu: "¿Cuál de estas películas la dirigió Jean-Luc Godard?",
     an: [ "Los cuatrocientos golpes", "Vivir su vida", "Cuento de primavera", "Noche y niebla"],
-    ok: 1},
+    ok: "Vivir su vida"},
 
     {qu: "¿En qué thriller setentero aparece un monólogo con la pregunta '¿hablas conmigo?'?",
     an: [ "La conversación", "Chacal", "Taxi Driver", "El cabo del miedo"],
-    ok: 2},
+    ok: "Taxi Driver"},
 
     {qu: "¿Cuál de estas producciones de Haneke es más antigua?",
     an: [ "La pianista", "Funny Games", "Código desconocido", "El séptimo continente"],
-    ok: 3},
+    ok: "El séptimo continente"},
 
     {qu: "¿Cuál de estas películas la protagoniza Klaus Kinski?",
     an: [ "Stroszek", "Fitzcarraldo", "Alicia en las ciudades", "El matrimonio de Maria Braun"],
-    ok: 1},
+    ok: "Fitzcarraldo"},
 
     {qu: "¿En cuál de las siguientes películas aparece una cartera con la inscripción 'BAD MOTHERFUCKER'?",
     an: [ "Pulp Fiction", "El gran Lebowski", "Jackie Brown", "Sospechosos habituales"],
-    ok: 0}
+    ok: "Pulp Fiction"}
 
 ]
 
@@ -51,6 +51,7 @@ function printQuestion(question){
     // creo un array en el que recojo las respuestas de la DATABASE
     let arrayAns = question.an;
 
+    shuffle(DATABASE[position].an)
     // recorro el array para generar los input+labels con sus valores correspondientes
     for (let i = 0; i < arrayAns.length; i++) {
         let input = document.createElement("input");
@@ -71,7 +72,7 @@ function printQuestion(question){
 
         label.addEventListener("click",() => {
             if (!label.classList.contains("clicked")) {
-                evaluateAnswer(question.ok, i, questionElements, label)
+                evaluateAnswer(question.ok, questionElements, label, arrayAns[i])
             }
             });
 
@@ -89,12 +90,12 @@ printQuestion(DATABASE[position]);
 
 // let answers = document.querySelectorAll("input");
 
-function evaluateAnswer(correctAnsw, answerNumber, nodes, answer) {
+function evaluateAnswer(correctAnsw, nodes, answer, selected) {
     answer.classList.add("checked");
     answer.classList.add("clicked");
     
     setTimeout( function() {
-        if (correctAnsw === answerNumber) {
+        if (correctAnsw === selected) {
             answer.classList.remove("checked");
             answer.classList.add("right");
             position++;
